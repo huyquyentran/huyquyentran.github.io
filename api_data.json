@@ -1,5 +1,377 @@
 [
   {
+    "type": "post",
+    "url": "/airline",
+    "title": "Create airline",
+    "name": "Create_airline",
+    "group": "Airline",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique access-key.</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "ADMIN - STAFF"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>(required, max: 255) Name of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "short_name",
+            "description": "<p>(required, max: 255) Short name of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "website",
+            "description": "<p>(optional, max: 255) Website of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contact_info",
+            "description": "<p>(optional) Contact info of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>(optional) Description info of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "logo",
+            "description": "<p>(optional, only allow image &lt; 15 MB ) Logo of the airline</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   \"name\": \"Vietnam Airline\",\n   \"short_name\": \"VNA\",\n   \"contact_info\": \"Nguyen Minh Cuong\",\n   \"website\": \"https://www.vietnamairlines.com‎\",\n   \"description\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request successfully</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/airline.controller.js",
+    "groupTitle": "Airline"
+  },
+  {
+    "type": "get",
+    "url": "/airline/:id",
+    "title": "Get airline information",
+    "name": "Get_airline_information",
+    "group": "Airline",
+    "permission": [
+      {
+        "name": "PUBLIC"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>(required) Unique id of airline</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request successfully</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "airline",
+            "description": "<p>Airline information.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"airline\": {\n       \"id\": 1,\n       \"logo\": null,\n       \"name\": \"Vietnam Airline\",\n       \"short_name\": \"VNA\",\n       \"contact_info\": \"Nguyen Minh Cuong\",\n       \"website\": \"https://www.vietnamairlines.com‎\",\n       \"description\": \"\"\n    }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost/v1.0.0/airline/1",
+        "type": "json"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "server/controllers/airline.controller.js",
+    "groupTitle": "Airline"
+  },
+  {
+    "type": "get",
+    "url": "/customer",
+    "title": "List all airline",
+    "name": "List_airline",
+    "group": "Airline",
+    "permission": [
+      {
+        "name": "PUBLIC"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "offset",
+            "description": "<p>(optional) Number of records per page</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>(optional) Number of pages</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "sort",
+            "description": "<p>(optional) Sort by field. Default: id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "direction",
+            "description": "<p>(optional) Sort direction. Defaullt: DESC</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request successfully</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "totalRecord",
+            "description": "<p>Total record in database.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "totalPage",
+            "description": "<p>Total page (Depends on offset).</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "page",
+            "description": "<p>Current page.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Array of airline .</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"success\": true,\n    \"totalRecord\": 2,\n    \"totalPage\": 1,\n    \"page\": 1,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"logo\": \"uploads/1572704621716_pexels-photo-1363873.jpeg\",\n            \"name\": \"Bamboo Airline\",\n            \"short_name\": \"BBA\",\n            \"contact_info\": \"Huy Quyen 0566490523\",\n            \"website\": \"https://www.bambooairlines.com.vn\",\n            \"description\": \"\"\n        },\n        {\n            \"id\": 1,\n            \"logo\": null,\n            \"name\": \"Vietnam Airline\",\n            \"short_name\": \"VNA\",\n            \"contact_info\": \"Nguyen Minh Cuong\",\n            \"website\": \"https://www.vietnamairlines.com‎\",\n            \"description\": \"\"\n        }\n    ]\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "http://localhost/v1.0.0/airline\nhttp://localhost/v1.0.0/airline?page=1\nhttp://localhost/v1.0.0/airline?page=1&offset=20",
+        "type": "json"
+      }
+    ],
+    "version": "0.0.0",
+    "filename": "server/controllers/airline.controller.js",
+    "groupTitle": "Airline"
+  },
+  {
+    "type": "post",
+    "url": "/airline/:id",
+    "title": "Update airline",
+    "name": "Update_airline",
+    "group": "Airline",
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "description": "<p>Users unique access-key.</p>"
+          }
+        ]
+      }
+    },
+    "permission": [
+      {
+        "name": "ADMIN - STAFF"
+      }
+    ],
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>(optional, max: 255) Name of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "short_name",
+            "description": "<p>(optional, max: 255) Short name of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "website",
+            "description": "<p>(optional, max: 255) Website of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "contact_info",
+            "description": "<p>(optional) Contact info of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>(optional) Description info of the airline</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "File",
+            "optional": false,
+            "field": "logo",
+            "description": "<p>(optional, only allow image &lt; 15 MB ) Logo of the airline</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Request-Example",
+          "content": "{\n   \"name\": \"Vietnam Airline\",\n   \"short_name\": \"VNA\",\n   \"contact_info\": \"Nguyen Minh Cuong\",\n   \"website\": \"https://www.vietnamairlines.com‎\",\n   \"description\": \"\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request successfully</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "server/controllers/airline.controller.js",
+    "groupTitle": "Airline"
+  },
+  {
     "type": "get",
     "url": "/auth/me",
     "title": "Get my information",
