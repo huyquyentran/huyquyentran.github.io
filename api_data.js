@@ -166,7 +166,7 @@ define({ "api": [
   },
   {
     "type": "get",
-    "url": "/customer",
+    "url": "/airline",
     "title": "List all airline",
     "name": "List_airline",
     "group": "Airline",
